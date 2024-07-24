@@ -145,14 +145,14 @@ function addTask(tsktitle,tskPriority){
 
     //Eliminar Item de Lista
     deleteBtn.addEventListener("click", function(){
-        eventList.removeChild(taskItem);
+        taskList.removeChild(taskItem);
         saveTasks();
     });
 
     //Editar Item de Lista
     editBtn.addEventListener("click", function(){
-        eventItem.firstChild.textContent = prompt("Edit Your Event",eventItem.firstChild.textContent);
-        eventItem.childNodes[1].textContent = prompt("Edit Event Date",eventItem.childNodes[1].textContent);
+        taskItem.firstChild.textContent = prompt("Edit Your Event",eventItem.firstChild.textContent);
+        taskItem.childNodes[1].textContent = prompt("Edit Event Date",eventItem.childNodes[1].textContent);
         saveTasks();
     })
 
