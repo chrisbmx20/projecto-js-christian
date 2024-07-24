@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events and Tasks</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <section class="row justify-center py-20">
+        <ul class="secondary-menu d-flex justify-center">
+            <li><a href="#" onclick="showElement()">Events</a></li>
+            <li><a href="#" onclick="showElement()">Tasks</a></li>
+        </ul>
+    </section>
+
+    <section class="row justify-center align-items py-20">
+        <div id="events" class="events">
+            <h2>Events</h2>
+            <div class="form-container py-20">
+                <input type="text" id="eventTitle" placeholder="Math Class">
+                <input type="date" id="eventDate" placeholder="24/07/2024">
+                <button type="button" id="addEvent">Add Event</button>
+            </div>
+
+            <ul id="event-list" class="py-20">
+
+            </ul>
+        </div>
+        <div id="tasks" class="events">
+            <h2>Tasks</h2>
+            <ul id="task-list">
+
+            </ul>
+        </div>
+    </section>
+
+
+    <script src="js/functions.js"></script>
+</body>
+</html>
