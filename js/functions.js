@@ -21,10 +21,7 @@ let addEventBtn = document.getElementById("addEvent");
 getEvents();
 
 addEventBtn.addEventListener("click",function(){
-/*
-    let eventItem = document.createElement("li");
-    let eventHeading = document.createElement("h3");
-    let evntDate = document.createElement("span");*/
+
         
     let eventTitle = document.getElementById("eventTitle").value;
     let eventDate = document.getElementById("eventDate").value;
@@ -36,35 +33,7 @@ addEventBtn.addEventListener("click",function(){
 
     }
 
-    
-/*
-    let deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = "Delete";
-    let editBtn = document.createElement("button");
-        editBtn.innerHTML = "Edit";
 
-    //Eliminar Item de Lista
-    deleteBtn.addEventListener("click", function(){
-        eventList.removeChild(eventItem);
-    });
-
-    //Editar Item de Lista
-    editBtn.addEventListener("click", function(){
-        eventItem.firstChild.textContent = prompt("Edit Your Event",eventItem.firstChild.textContent);
-        eventItem.childNodes[1].textContent = prompt("Edit Event Date",eventItem.childNodes[1].textContent);
-    })
-
-
-    eventHeading.innerHTML = eventTitle.value;
-    evntDate.innerHTML = eventDate.value;
-
-    eventItem.appendChild(eventHeading);
-    eventItem.appendChild(evntDate);
-    eventItem.appendChild(deleteBtn);
-    eventItem.appendChild(editBtn);
-
-    eventList.appendChild(eventItem);
-    */
 }
 );
 
