@@ -15,10 +15,12 @@ function showElement(index){
 
 //Codigo de los eventos
 let eventList = document.getElementById("event-list");
+let taskList = document.getElementById("task-list");
 let addEventBtn = document.getElementById("addEvent");
 
 
 getEvents();
+getTasks();
 
 addEventBtn.addEventListener("click",function(){
 
@@ -47,8 +49,10 @@ function addEvent(evtitle,evDate){
 
     let deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "Delete";
+        deleteBtn.className ="delete-button";
     let editBtn = document.createElement("button");
         editBtn.innerHTML = "Edit";
+        editBtn.className = "edit-button";
 
     //Eliminar Item de Lista
     deleteBtn.addEventListener("click", function(){
@@ -88,7 +92,6 @@ function saveEvents() {
             }
         );
 
-        console.log("evento ", event);
 
     });
 
@@ -103,4 +106,90 @@ function getEvents() {
 }
 
 
+//codigo de las tareas
+let addTaskBtn = document.getElementById("addTask");
+
+
+addTaskBtn.addEventListener("click",function(){
+
+    let prioritySelect = document.getElementById("priority").value;    
+    let taskTitle = document.getElementById("taskText").value;
+
+
+    if (taskTitle !="" && prioritySelect!=""){
+        addTask(taskTitle,prioritySelect);
+        taskTitleTitle = "";
+        prioritySelect = "low";
+        saveTasks();
+
+    }
+
+
+}
+);
+
+function addTask(tsktitle,tskPriority){
+    let taskItem = document.createElement("li");
+    let taskHeading = document.createElement("h3");
+    let priority = document.createElement("span");
+        
+    taskHeading.innerHTML = tsktitle;
+    priority.innerHTML = tskPriority;
+
+    let deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "Delete";
+        deleteBtn.className ="delete-button"
+    let editBtn = document.createElement("button");
+        editBtn.innerHTML = "Edit";
+        editBtn.className = "edit-button";
+
+    //Eliminar Item de Lista
+    deleteBtn.addEventListener("click", function(){
+        eventList.removeChild(taskItem);
+        saveTasks();
+    });
+
+    //Editar Item de Lista
+    editBtn.addEventListener("click", function(){
+        eventItem.firstChild.textContent = prompt("Edit Your Event",eventItem.firstChild.textContent);
+        eventItem.childNodes[1].textContent = prompt("Edit Event Date",eventItem.childNodes[1].textContent);
+        saveTasks();
+    })
+
+    taskItem.appendChild(taskHeading);
+    taskItem.appendChild(priority);
+    taskItem.appendChild(deleteBtn);
+    taskItem.appendChild(editBtn);
+
+    taskList.appendChild(taskItem);
+
+    saveTasks();
+
+}
+
+function saveTasks() {
+    const taskArr = [];
+
+
+    taskList.querySelectorAll('li').forEach(tasktItem => {
+
+        taskArr.push(
+            {
+                name:tasktItem.firstChild.textContent,
+                priority:tasktItem.childNodes[1].textContent
+
+            }
+        );
+
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(taskArr));
+    
+}
+
+function getTasks() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(task => addEvent(task.name,task.priority));
+    
+}
 

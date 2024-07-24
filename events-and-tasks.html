@@ -18,7 +18,7 @@
     <section class="row justify-center align-items py-20">
         <div id="events" class="events">
             <h2>Events</h2>
-            <div class="form-container py-20">
+            <div class="form-container py-20 d-flex flex-row">
                 <input type="text" id="eventTitle" placeholder="Math Class">
                 <input type="date" id="eventDate" placeholder="24/07/2024">
                 <button type="button" id="addEvent">Add Event</button>
@@ -30,7 +30,18 @@
         </div>
         <div id="tasks" class="events">
             <h2>Tasks</h2>
-            <ul id="task-list">
+            <div class="form-container py-20">
+                <input type="text" id="taskText" placeholder="Add Task">
+                <select name="" id="priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <button type="button" id="addTask">Add Event</button>
+            </div>
+
+            <ul id="task-list" class="">
 
             </ul>
         </div>
