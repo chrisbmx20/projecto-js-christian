@@ -101,20 +101,23 @@ function addEvent(evtitle,evDate){
 
     eventList.appendChild(eventItem);
 
+    saveEvents();
+
 }
 
 function saveEvents() {
     const eventArr = [];
-    const event = {
-         title:"",
-         date:"",
-    }
+
 
     eventList.querySelectorAll('li').forEach(eventItem => {
 
-        event.title = eventItem.firstChild.textContent;
-        event.date =  eventItem.childNodes[1].textContent;
-        eventArr.push(event);
+        eventArr.push(
+            {
+                title:eventItem.firstChild.textContent,
+                date:eventItem.childNodes[1].textContent
+
+            }
+        );
 
         console.log("evento ", event);
 
