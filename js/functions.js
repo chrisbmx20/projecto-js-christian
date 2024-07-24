@@ -55,11 +55,30 @@ addEventBtn.addEventListener("click",function(){
 }
 );
 
-function getEvents(){
 
+function saveEvents() {
+    const eventArr = [];
+    const event = {
+         title:"",
+         date:"",
+    }
+
+    eventList.querySelectorAll('li').forEach(eventItem => {
+
+        event.title = eventItem.firstChild.textContent;
+        event.date =  eventItem.childNodes[1].textContent;
+        eventArr.push(event);
+
+    });
+
+    localStorage.setItem('events', JSON.stringify(eventArr));
+    
 }
-function saveEvents(){
 
+function getEvents() {
+    const events = JSON.parse(localStorage.getItem('events')) || [];
+    events.forEach(event => addEvent(event));
+    
 }
 
 
