@@ -1,96 +1,96 @@
-*{
-    padding:0;
-    margin:0;
+* {
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
-    border: 1px dashed darkred;
-
+    /*border: 1px dashed darkred;*/
 }
 
-li{
+li {
     list-style: none;
 }
-a{
+
+a {
     text-decoration: none;
 }
 
-.secondary-menu li{
-    width: 100px;
-    height: 25px;
+.secondary-menu {
+    width: 50%;
 }
 
-.row{
-    display:flex;
+.secondary-menu li {
+    width: 200px;
+    height: 75px;
+    padding: 10px 20px;
+    margin-left: 10px;
+}
+
+.secondary-menu li a {
+    border: 1px solid #8e8e8e;
+    display: flex;
     width: 100%;
-}
-
-.d-flex{
-    display:flex;
-}
-
-.flex-column{
-    flex-direction: column;
-}
-.flex-row{
-    flex-direction: row;
-}
-
-.justify-center{
-    justify-content: center;
-}
-
-.align-items{
+    height: 100%;
+    justify-content:center;
     align-items: center;
 }
-.events{
-    width:80%;
-    height: 500px;
-    
-}
 
-.events:nth-child(1){
-    display:none;
-}
-
-.py-20{
-    padding-top:20px;
-    padding-bottom:20px;
-}
-
-.secondary-menu{
-    width:50%;
-}
-.secondary-menu li{
-    padding:10px 20px;
-    margin-left:10px;
-    
-}
-
-.secondary-menu li a{
-    display: block;
-    width: 100%;
-    
-}
-
-ul button{
+ul button {
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
     font-weight: 600;
-    font-size:18px;
-
+    font-size: 18px;
 }
 
-.delete-button{
+.delete-button {
     background-color: rgb(197, 62, 62);
-    color:#ffffff;   
+    color: #ffffff;
 }
-.edit-button{
+
+.edit-button {
     background-color: #bfcc4b;
-    color:black;
+    color: black;
 }
 
-#task-list li,#event-list li{
-    width:70%;
+#task-list li, #event-list li {
+    width: 70%;
     display: flex;
+}
 
+.row {
+    display: flex;
+    width: 100%;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-items {
+    align-items: center;
+}
+
+.events {
+    width: 50%;
+    height: 500px;
+}
+
+.events:nth-child(1) {
+    display: none;
+}
+
+.py-20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

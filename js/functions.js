@@ -16,6 +16,7 @@ function showElement(index){
 //Codigo de los eventos
 let eventList = document.getElementById("event-list");
 let taskList = document.getElementById("task-list");
+
 let addEventBtn = document.getElementById("addEvent");
 
 
@@ -118,7 +119,7 @@ addTaskBtn.addEventListener("click",function(){
 
     if (taskTitle !="" && prioritySelect!=""){
         addTask(taskTitle,prioritySelect);
-        taskTitleTitle = "";
+        taskTitle = "";
         prioritySelect = "low";
         saveTasks();
 
@@ -138,7 +139,8 @@ function addTask(tsktitle,tskPriority){
 
     let deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "Delete";
-        deleteBtn.className ="delete-button"
+        deleteBtn.className ="delete-button";
+
     let editBtn = document.createElement("button");
         editBtn.innerHTML = "Edit";
         editBtn.className = "edit-button";
@@ -151,8 +153,8 @@ function addTask(tsktitle,tskPriority){
 
     //Editar Item de Lista
     editBtn.addEventListener("click", function(){
-        taskItem.firstChild.textContent = prompt("Edit Your Event",eventItem.firstChild.textContent);
-        taskItem.childNodes[1].textContent = prompt("Edit Event Date",eventItem.childNodes[1].textContent);
+        taskItem.firstChild.textContent = prompt("Edit Your Event",taskItem.firstChild.textContent);
+        taskItem.childNodes[1].textContent = prompt("Edit Event Date",taskItem.childNodes[1].textContent);
         saveTasks();
     })
 
@@ -189,7 +191,7 @@ function saveTasks() {
 
 function getTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.forEach(task => addEvent(task.name,task.priority));
+    tasks.forEach(task => addTask(task.name,task.priority));
     
 }
 
