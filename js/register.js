@@ -68,8 +68,6 @@ function checkUser(user){
     
     userResults.forEach(element => {
         user.email == element.email && user.password == element.password ? found = true : found = false;
-        
-        console.log(element.email);
     });
 
     return found;

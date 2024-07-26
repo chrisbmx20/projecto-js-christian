@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /*border: 1px dashed darkred;*/
 }
 
 li {
@@ -33,28 +32,31 @@ a {
     align-items: center;
 }
 
-ul button {
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 18px;
-}
 
 .delete-button {
-    background-color: rgb(197, 62, 62);
-    color: #ffffff;
+    color: #262626;
 }
 
 .edit-button {
-    background-color: #bfcc4b;
-    color: black;
+    color:#262626;
+}
+
+.edit-button,.delete-button{
+    border: none;
+    padding:10px;
+    background-color: transparent;
 }
 
 #task-list li, #event-list li {
-    width: 70%;
+    width: 100%;
     display: flex;
 }
+
+#task-list, #event-list{
+    width: 100%;
+    padding: 0px;
+}
+
 
 .row {
     display: flex;
@@ -107,4 +109,20 @@ ul button {
   .container{
     height: 100vh;
  
+  }
+
+  .dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .list-item{
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid #8e8e8e;
+    margin-bottom: 10px;
+    padding-left:10px;
   }
