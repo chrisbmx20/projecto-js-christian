@@ -108,8 +108,8 @@ let addTaskBtn = document.getElementById("addTask");
 
 addTaskBtn.addEventListener("click",function(){
 
-    let prioritySelect = document.getElementById("priority").value;    
-    let taskTitle = document.getElementById("taskText").value;
+    const prioritySelect = document.getElementById("priority").value;    
+    const taskTitle = document.getElementById("taskText").value;
 
     if (taskTitle !="" && prioritySelect!=""){
         addTask(taskTitle,prioritySelect);
@@ -132,7 +132,6 @@ function addTask(tsktitle,tskPriority){
         taskHeading.classList.add("task-heading");
 
     let priority = document.createElement("span");
-        priority.classList.add("btn");
         priority.classList.add("priority");
 
 
@@ -150,13 +149,13 @@ function addTask(tsktitle,tskPriority){
 
 
     if(tskPriority === "low"){
-        priority.classList.add("btn-outline-success");
+        priority.classList.add("text-success");
     }
     else if(tskPriority === "medium"){
-        priority.classList.add("btn-outline-warning");
+        priority.classList.add("text-warning");
     }
     else{
-        priority.classList.add("btn-outline-danger");
+        priority.classList.add("text-danger");
     }
 
 
@@ -177,13 +176,13 @@ function addTask(tsktitle,tskPriority){
         saveTasks();
     });
 
-
+    //Editar Item de
     editBtn.addEventListener("click", function(){
 
-        let prioritySelect = document.getElementById("priority");    
-        let taskTitle = document.getElementById("taskText");
+        const prioritySelect = document.getElementById("priority");    
+        const taskTitle = document.getElementById("taskText");
         
-        addTaskBtn.textContent = "Edit Task";
+        addTaskBtn.textContent = "";
 
         taskTitle.value = taskItem.firstChild.textContent;
         console.log(taskItem.firstChild.textContent);
