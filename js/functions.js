@@ -108,8 +108,8 @@ let addTaskBtn = document.getElementById("addTask");
 
 addTaskBtn.addEventListener("click",function(){
 
-    const prioritySelect = document.getElementById("priority").value;    
-    const taskTitle = document.getElementById("taskText").value;
+    let prioritySelect = document.getElementById("priority").value;    
+    let taskTitle = document.getElementById("taskText").value;
 
     if (taskTitle !="" && prioritySelect!=""){
         addTask(taskTitle,prioritySelect);
@@ -176,11 +176,11 @@ function addTask(tsktitle,tskPriority){
         saveTasks();
     });
 
-    //Editar Item de
+    //Editar Item de Lista
     editBtn.addEventListener("click", function(){
 
-        const prioritySelect = document.getElementById("priority");    
-        const taskTitle = document.getElementById("taskText");
+        let prioritySelect = document.getElementById("priority");    
+        let taskTitle = document.getElementById("taskText");
         
         addTaskBtn.textContent = "";
 
@@ -188,13 +188,28 @@ function addTask(tsktitle,tskPriority){
         console.log(taskItem.firstChild.textContent);
         prioritySelect.value = taskItem.childNodes[1].textContent;
 
-        addTaskBtn.addEventListener("click",()=>{
+        addTaskBtn.textContent = "Edit Task";
+        addTaskBtn.id ='editTaskBtn';
+
+        
+        document.getElementById("editTaskBtn").addEventListener("click",()=>{
+            taskList.removeChild(taskItem);
+
             taskItem.firstChild.textContent = taskTitle.value;
-            taskItem.childNodes[1].textContent = prioritySelect.value;
+            taskItem.childNodes[1].textContent = prioritySelect.value; 
+
+            taskTitle.value = "";
+            prioritySelect.value = "low";
+            
+            saveTasks();
+            
+            document.getElementById("editTaskBtn").id ="addTask";
+            document.getElementById("addTask").textContent ="Add Task";
+            
         })
-        addTaskBtn.textContent = "Add Task";
-        taskTitle.value = "";
-        saveTasks();
+
+         
+        
     })
 
     btnContainer.appendChild(editBtn);

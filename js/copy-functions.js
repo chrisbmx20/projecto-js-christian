@@ -74,17 +74,12 @@ function addEvent(evtitle,evDate){
     eventItem.appendChild(editBtn);
 
     eventItem ? eventList.appendChild(eventItem) : console.log("El Elemento No existe");
-
-    
-  
-
     saveEvents();
 
 }
 
 function saveEvents() {
     const eventArr = [];
-
 
     eventList.querySelectorAll('li').forEach(eventItem => {
 
@@ -95,7 +90,6 @@ function saveEvents() {
 
             }
         );
-
 
     });
 
@@ -109,16 +103,13 @@ function getEvents() {
     
 }
 
-
 //codigo de las tareas
 let addTaskBtn = document.getElementById("addTask");
-
 
 addTaskBtn.addEventListener("click",function(){
 
     let prioritySelect = document.getElementById("priority").value;    
     let taskTitle = document.getElementById("taskText").value;
-
 
     if (taskTitle !="" && prioritySelect!=""){
         addTask(taskTitle,prioritySelect);
@@ -127,28 +118,53 @@ addTaskBtn.addEventListener("click",function(){
         saveTasks();
 
     }
-
-
 }
 );
 
 function addTask(tsktitle,tskPriority){
 
     let taskItem = document.createElement("li");
-        taskItem.classList.add("list-item")
+        taskItem.classList.add("list-item");
+
     let taskHeading = document.createElement("h3");
+        taskHeading.classList.add("task-heading");
+
     let priority = document.createElement("span");
+        priority.classList.add("priority");
+
+    let btnContainer = document.createElement("div");
+        btnContainer.classList.add("btn-container");
+
+
+    let editIcon = document.createElement("i");
+        editIcon.classList.add("fa-regular");
+        editIcon.classList.add("fa-pen-to-square");
+
+    let deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("fa-solid");
+    deleteIcon.classList.add("fa-trash-can");
+
+
+    if(tskPriority === "low"){
+        priority.classList.add("text-success");
+    }
+    else if(tskPriority === "medium"){
+        priority.classList.add("text-warning");
+    }
+    else{
+        priority.classList.add("text-danger");
+    }
 
     taskHeading.innerHTML = tsktitle;
     priority.innerHTML = tskPriority;
 
     let deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = "Delete";
+        deleteBtn.appendChild(deleteIcon);
         deleteBtn.className ="delete-button";
 
     let editBtn = document.createElement("button");
-        editBtn.innerHTML = "Edit";
         editBtn.className = "edit-button";
+        editBtn.appendChild(editIcon);
 
     //Eliminar Item de Lista
     deleteBtn.addEventListener("click", function(){
@@ -158,15 +174,42 @@ function addTask(tsktitle,tskPriority){
 
     //Editar Item de Lista
     editBtn.addEventListener("click", function(){
-        taskItem.firstChild.textContent = prompt("Edit Your Event",taskItem.firstChild.textContent);
-        taskItem.childNodes[1].textContent = prompt("Edit Event Date",taskItem.childNodes[1].textContent);
-        saveTasks();
+
+        let prioritySelect = document.getElementById("priority");    
+        let taskTitle = document.getElementById("taskText");
+        
+        addTaskBtn.textContent = "";
+
+        taskTitle.value = taskItem.firstChild.textContent;
+        console.log(taskItem.firstChild.textContent);
+        prioritySelect.value = taskItem.childNodes[1].textContent;
+
+        addTaskBtn.textContent = "Edit Task";
+        addTaskBtn.id ='editTaskBtn';
+
+        document.getElementById("editTaskBtn").addEventListener("click",()=>{
+            taskList.removeChild(taskItem);
+
+            taskItem.firstChild.textContent = taskTitle.value;
+            taskItem.childNodes[1].textContent = prioritySelect.value; 
+
+            taskTitle.value = "";
+            prioritySelect.value = "low";
+            
+            saveTasks();
+            
+            document.getElementById("editTaskBtn").id ="addTask";
+            document.getElementById("addTask").textContent ="Add Task"; 
+        })   
     })
+
+    btnContainer.appendChild(editBtn);
+    btnContainer.appendChild(deleteBtn);
 
     taskItem.appendChild(taskHeading);
     taskItem.appendChild(priority);
-    taskItem.appendChild(deleteBtn);
-    taskItem.appendChild(editBtn);
+    taskItem.appendChild(btnContainer);
+    
 
     taskList.appendChild(taskItem);
 
@@ -176,15 +219,12 @@ function addTask(tsktitle,tskPriority){
 
 function saveTasks() {
     const taskArr = [];
-
-
     taskList.querySelectorAll('li').forEach(tasktItem => {
 
         taskArr.push(
             {
                 name:tasktItem.firstChild.textContent,
                 priority:tasktItem.childNodes[1].textContent
-
             }
         );
 
