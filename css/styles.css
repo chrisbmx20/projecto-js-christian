@@ -77,7 +77,7 @@ ul button {
     justify-content: center;
 }
 
-.align-items {
+.align-center {
     align-items: center;
 }
 
@@ -86,11 +86,25 @@ ul button {
     height: 500px;
 }
 
-.events:nth-child(1) {
-    display: none;
+#tasks{
+    display:none;
 }
 
 .py-20 {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.login-form {
+    width: 350px;
+    padding: 2rem 1rem 1rem;
+  }
+  
+  form {
+    padding: 1rem;
+  }
+
+  .container{
+    height: 100vh;
+ 
+  }

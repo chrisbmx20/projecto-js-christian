@@ -1,15 +1,15 @@
+
 function showElement(index){
     let event = document.getElementById("events");
     let task = document.getElementById("tasks");
 
-    if(event.style.display==="block"){
+    if(index === 1){
         event.style.display = "none";
         task.style.display = "block";
     }
-    else{
+    else if(index === 0){
         event.style.display = "block";
         task.style.display = "none";
-
     }
 }
 
@@ -73,7 +73,10 @@ function addEvent(evtitle,evDate){
     eventItem.appendChild(deleteBtn);
     eventItem.appendChild(editBtn);
 
-    eventList.appendChild(eventItem);
+    eventItem ? eventList.appendChild(eventItem) : console.log("El Elemento No existe");
+
+    
+  
 
     saveEvents();
 
@@ -194,4 +197,7 @@ function getTasks() {
     tasks.forEach(task => addTask(task.name,task.priority));
     
 }
+
+
+
 
