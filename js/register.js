@@ -1,21 +1,45 @@
 //register form
-let registerForm = document.getElementById("registerForm");
+const registerForm = document.getElementById("registerForm");
+const loginForm = document.getElementById("loginForm");
 
-registerForm.addEventListener("submit",event => {
-    event.preventDefault();
-    const user = {}
-
-    user.name = document.getElementById("firstName").value;
-    user.lastName = document.getElementById("lastName").value;
-    user.phoneNumber =document.getElementById("phoneNumber").value;
-    user.password = document.getElementById("password").value;
-    user.email = document.getElementById("email").value;
-
-    validateFormFields(user)? saveUser(user) : console.log("There was an error");
-
-    clearForm(registerForm);
+if(registerForm){
+    registerForm.addEventListener("submit",event => {
+        event.preventDefault();
+        const user = {}
+    
+        user.name = document.getElementById("firstName").value;
+        user.lastName = document.getElementById("lastName").value;
+        user.phoneNumber =document.getElementById("phoneNumber").value;
+        user.password = document.getElementById("password").value;
+        user.email = document.getElementById("email").value;
+    
+        validateFormFields(user)? saveUser(user) : console.log("There was an error");
+    
+        clearForm(registerForm);
+    }
+    );
 }
-)
+
+if(loginForm){
+    loginForm.addEventListener("submit", event =>{
+        event.preventDefault();
+    
+        const userLogin = {}
+    
+        userLogin.email = document.getElementById("email");
+        userLogin.password = document.getElementById("password");
+    
+        if(validateFormFields(userLogin)){
+            if(checkUser(userLogin)){
+                window.location.href = 'events-and-tasks.html'
+            }
+            else{
+                alert("Email or Password not correct");
+            }
+        }
+    
+    });
+}
 
 function validateFormFields(obj) {
     return Object.values(obj).every(value => value !== "");
@@ -37,6 +61,16 @@ function clearForm(form){
     form.reset();
 }
 
+function checkUser(user){
+    let found = false;
+    const userResults = getUsers() || false;
+
+    userResults.forEach(element => {
+        user.email == element.email && user.password == element.password ? found = true : found = false;
+    });
+
+    return found;
+}
 
 
 
