@@ -132,7 +132,7 @@ function addTask(tsktitle,tskPriority){
         taskHeading.classList.add("task-heading");
 
     let priority = document.createElement("span");
-        priority.classList.add("priority");
+        priority.classList.add("dot");
 
 
     let btnContainer = document.createElement("div");
@@ -149,18 +149,18 @@ function addTask(tsktitle,tskPriority){
 
 
     if(tskPriority === "low"){
-        priority.classList.add("text-success");
+        priority.classList.add("bg-success");
     }
     else if(tskPriority === "medium"){
-        priority.classList.add("text-warning");
+        priority.classList.add("bg-warning");
     }
     else{
-        priority.classList.add("text-danger");
+        priority.classList.add("bg-danger");
     }
 
 
     taskHeading.innerHTML = tsktitle;
-    priority.innerHTML = tskPriority;
+    //priority.innerHTML = tskPriority;
 
     let deleteBtn = document.createElement("button");
         deleteBtn.appendChild(deleteIcon);
@@ -191,7 +191,6 @@ function addTask(tsktitle,tskPriority){
         addTaskBtn.textContent = "Edit Task";
         addTaskBtn.id ='editTaskBtn';
 
-        
         document.getElementById("editTaskBtn").addEventListener("click",()=>{
             taskList.removeChild(taskItem);
 
@@ -228,12 +227,13 @@ function addTask(tsktitle,tskPriority){
 
 function saveTasks() {
     const taskArr = [];
+
     taskList.querySelectorAll('li').forEach(tasktItem => {
 
         taskArr.push(
             {
                 name:tasktItem.firstChild.textContent,
-                priority:tasktItem.childNodes[1].textContent
+                priority:checkDots(tasktItem.childNodes[1])
             }
         );
 
@@ -247,6 +247,18 @@ function getTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.forEach(task => addTask(task.name,task.priority));
     
+}
+
+function checkDots(dot){
+    if(dot.classList.contains("bg-success")){
+        return "low";
+    }
+    else if(dot.classList.contains("bg-warning")){
+        return "medium";
+    }
+    else{
+        return "high";
+    }
 }
 
 
