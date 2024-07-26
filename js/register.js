@@ -26,8 +26,8 @@ if(loginForm){
     
         const userLogin = {}
     
-        userLogin.email = document.getElementById("email");
-        userLogin.password = document.getElementById("password");
+        userLogin.email = document.getElementById("email").value;
+        userLogin.password = document.getElementById("password").value;
     
         if(validateFormFields(userLogin)){
             if(checkUser(userLogin)){
@@ -63,10 +63,13 @@ function clearForm(form){
 
 function checkUser(user){
     let found = false;
-    const userResults = getUsers() || false;
+    const userResults = getUsers() || [];
 
+    
     userResults.forEach(element => {
         user.email == element.email && user.password == element.password ? found = true : found = false;
+        
+        console.log(element.email);
     });
 
     return found;
