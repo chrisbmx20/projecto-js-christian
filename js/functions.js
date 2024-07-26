@@ -177,12 +177,6 @@ function addTask(tsktitle,tskPriority){
         saveTasks();
     });
 
-    //Editar Item de Lista
-   /* editBtn.addEventListener("click", function(){
-        taskItem.firstChild.textContent = prompt("Edit Your Event",taskItem.firstChild.textContent);
-        taskItem.childNodes[1].textContent = prompt("Edit Event Date",taskItem.childNodes[1].textContent);
-        saveTasks();
-    })*/
 
     editBtn.addEventListener("click", function(){
 
@@ -195,7 +189,7 @@ function addTask(tsktitle,tskPriority){
         console.log(taskItem.firstChild.textContent);
         prioritySelect.value = taskItem.childNodes[1].textContent;
 
-        addEventBtn.addEventListener("click",()=>{
+        addTaskBtn.addEventListener("click",()=>{
             taskItem.firstChild.textContent = taskTitle.value;
             taskItem.childNodes[1].textContent = prioritySelect.value;
         })
