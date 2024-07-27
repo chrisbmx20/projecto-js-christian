@@ -183,10 +183,9 @@ function addTask(tsktitle,tskPriority){
         let taskTitle = document.getElementById("taskText");
         
         addTaskBtn.textContent = "";
-
+        //taskItem.style.backgroundColor ="blueviolet";
         taskTitle.value = taskItem.firstChild.textContent;
-        console.log(taskItem.firstChild.textContent);
-        prioritySelect.value = taskItem.childNodes[1].textContent;
+        prioritySelect.value = checkDots(taskItem.childNodes[1]);
 
         addTaskBtn.textContent = "Edit Task";
         addTaskBtn.id ='editTaskBtn';
@@ -218,7 +217,6 @@ function addTask(tsktitle,tskPriority){
     taskItem.appendChild(priority);
     taskItem.appendChild(btnContainer);
     
-
     taskList.appendChild(taskItem);
 
     saveTasks();
