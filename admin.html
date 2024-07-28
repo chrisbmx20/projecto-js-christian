@@ -23,9 +23,9 @@
     </header>
 
     <div class="container-fluid mx-0 row min-vh-100 px-0 py-6">
-        <div class="col-2">
+        <div class="col-2 py-5">
 
-            <ul class="nav flex-column sidebar-nav">
+            <ul class="nav flex-column sidebar-nav py-20">
                 <li class="nav-item">
                     <a class="nav-link active" href="#" onclick="showElement(0)"><i class="fa-regular fa-calendar-days mx-2"></i>Events</a>
                 </li>
@@ -34,16 +34,17 @@
                     </a></li>
             </ul>
         </div>
-        <div class="col-10 bg-grey">
+        <div class="col-10 bg-grey py-5">
             <section class="row justify-center aligncenter py-20">
                 <div id="events" class="events">
                     <h2>Events</h2>
-                    <div class="form-container py-20 d-flex flex-row">
-                        <input type="text" id="eventTitle" placeholder="Math Class">
-                        <input type="date" id="eventDate" placeholder="24/07/2024">
-                        <button type="button" id="addEvent">Add Event</button>
+
+                    <div class="form-container input-group py-20 ">
+                        <input type="text" id="eventTitle" placeholder="Math Class" class="form-control">
+                        <input type="date" id="eventDate" placeholder="24/07/2024" class="form-control">
+                        <button class="btn btn-primary" type="button" id="addEvent">Add Event</button>
                     </div>
-        
+
                     <ul id="event-list" class="py-20">
         
                     </ul>
@@ -60,7 +61,7 @@
                           <option value="high">High</option>
                         </select>
                         <button class="btn btn-primary" type="button" id="addTask">Add Task</button>
-                      </div>
+                    </div>
         
                     <ul id="task-list" class="">
         
