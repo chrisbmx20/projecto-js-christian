@@ -4,15 +4,6 @@
     box-sizing: border-box;
 }
 
-@import url(../css/ajax.min.css);
-@import url(../css/webpixels.min.css);
-
-
-@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
-
-/* Bootstrap Icons */
-@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
-
 li {
     list-style: none;
 }
