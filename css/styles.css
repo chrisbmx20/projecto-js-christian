@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+@import url(../css/ajax.min.css);
+@import url(../css/webpixels.min.css);
+
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
 li {
     list-style: none;
 }
@@ -124,6 +133,7 @@ a {
     border-radius: 8px;
     border: 1px solid #8e8e8e;
     margin-bottom: 10px;
+    background-color: #ffffff;
     padding-left:10px;
   }
 
@@ -131,3 +141,19 @@ a {
     width: 80%;
     margin: 0px;
   }
+
+  /*admin dashboard*/
+
+
+
+.bg-purple,.btn-primary{
+    background-color: #5c60f5;
+}
+
+.bg-grey{
+    background-color: #f5f9fc;
+}
+
+.nav-link:hover{
+    background-color: #f5f9fc;
+}
