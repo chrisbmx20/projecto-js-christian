@@ -157,3 +157,37 @@ a {
 .aside-menu li i{
     margin-right:30px;
 }
+
+.event-container{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid #8e8e8e;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+
+.date-container{
+    width:20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.date-container span{
+    margin: bottom 10px;
+    font-weight: 600;
+    font-size: 20px;
+}
+.event-features{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: center;
+    padding: 20px;
+}

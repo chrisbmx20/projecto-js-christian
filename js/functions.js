@@ -14,7 +14,7 @@ let taskList = document.getElementById("task-list");
 let addEventBtn = document.getElementById("addEvent");
 
 
-getEvents();
+showEvents(getEvents());
 getTasks();
 
 addEventBtn.addEventListener("click",function(){
@@ -23,83 +23,96 @@ addEventBtn.addEventListener("click",function(){
     let eventDate = document.getElementById("eventDate").value;
 
     if (eventTitle !="" && eventDate!=""){
-        addEvent(eventTitle,eventDate);
+        const event = {
+                title: eventTitle,
+                date: eventDate
+        }
+        saveEvents(event);
         eventTitle ="";
-        saveEvents();
     }
 }
 );
 
-function addEvent(evtitle,evDate){
+function showEvents(events){
 
-    let eventItem = document.createElement("li");
-    let eventHeading = document.createElement("h3");
-    let evntDate = document.createElement("span");
-
-    let eventContainer = document.createElement("div");
+    events.forEach(event =>{
+        let eventContainer = document.createElement("div");
         eventContainer.classList.add("event-container");
-
-    let dateContainer = document.createElement("div");
-        dateContainer.classList.add("date-container");
-
-    let eventDay = document.createElement("span");
-    let eventMonth = document.createElement("span");
-
-
-
-    eventHeading.innerHTML = evtitle;
-    evntDate.innerHTML = evDate;
-
-    let btnContainer = createButtons();
-    let editBtn = btnContainer.firstChild;
-    let deleteBtn = btnContainer.childNodes[1];
-
-    //Eliminar Item de EVENTO
-    deleteBtn.addEventListener("click", function(){
-        eventList.removeChild(eventItem);
-        saveEvents();
-    });
-
-    //Editar Item de EVENTO
-    editBtn.addEventListener("click", function(){
-        eventItem.firstChild.textContent = prompt("Edit Your Event",eventItem.firstChild.textContent);
-        eventItem.childNodes[1].textContent = prompt("Edit Event Date",eventItem.childNodes[1].textContent);
-        saveEvents();
-    })
     
-    eventItem.appendChild(eventHeading);
-    eventItem.appendChild(evntDate);
-    eventItem.appendChild(deleteBtn);
-    eventItem.appendChild(editBtn);
+        let dateContainer = document.createElement("div");
+        dateContainer.classList.add("date-container");
+    
+        let eventFeatures = document.createElement("div");
+        eventFeatures.classList.add("event-features");
+    
+        let eventHeading = document.createElement("h3");
+        eventHeading.textContent = event.title;
+    
+        let eventDescription = document.createElement("p");
+        eventDescription.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, placeat.";
+    
+        // de aqui obtenemos el
+        let eventDateObjt = getDayAndMonth(event.date);
+    
+        let eventDaySpan = document.createElement("span");
+        eventDaySpan.textContent = eventDateObjt.dayNumber;
+    
+        let eventMonthSpan = document.createElement("span");
+        eventMonthSpan.textContent = eventDateObjt.montText;
+    
+        let btnContainer = createButtons();
+        let editBtn = btnContainer.firstChild;
+        let deleteBtn = btnContainer.childNodes[1];
+    
+        dateContainer.appendChild(eventDaySpan);
+        dateContainer.appendChild(eventMonthSpan);
+    
+        eventFeatures.appendChild(eventHeading);
+        eventFeatures.appendChild(eventDescription);
+        eventFeatures.appendChild(btnContainer);
+    
+        eventContainer.appendChild(dateContainer);
+        eventContainer.appendChild(eventFeatures);
+    
+        eventList.appendChild(eventContainer);
+    
+        //Eliminar Item de EVENTO
+        deleteBtn.addEventListener("click", function(){
+            eventList.removeChild(eventContainer);
+            updateEvents(events);
+        });
+    
+        //Editar Item de EVENTO
+        editBtn.addEventListener("click", function(){
+            eventHeading.textContent = prompt("Edit Your Event", eventHeading.textContent);
+            eventDaySpan.textContent = prompt("Edit Event Day", eventDaySpan.textContent);
+            eventMonthSpan.textContent = prompt("Edit Event Date", eventMonthSpan.textContent);
+            updateEvents(events);
+        });
+    });
+    
+   }
 
-    eventItem ? eventList.appendChild(eventItem) : console.log("El Elemento No existe");
-    saveEvents();
-
+function updateEvents(events){
+    localStorage.setItem('events', JSON.stringify(events)); 
 }
 
-function saveEvents() {
-    const eventArr = [];
+function saveEvents(event) {
+    const eventArr = getEvents() || [];
+    eventArr.push(
+        {
+            title:event.title,
+            date:event.date
+        }
+    );
 
-    eventList.querySelectorAll('li').forEach(eventItem => {
-
-        eventArr.push(
-            {
-                title:eventItem.firstChild.textContent,
-                date:eventItem.childNodes[1].textContent
-
-            }
-        );
-
-    });
-
-    localStorage.setItem('events', JSON.stringify(eventArr));
-    
+    updateEvents(eventArr);
+    showEvents(eventArr); 
 }
 
 function getEvents() {
     const events = JSON.parse(localStorage.getItem('events')) || [];
-    events.forEach(event => addEvent(event.title,event.date));
-    
+    return events;
 }
 
 //codigo de las tareas
@@ -115,18 +128,13 @@ addTaskBtn.addEventListener("click",function(){
         taskTitle = "";
         prioritySelect = "low";
         saveTasks();
-
     }
-
-
 }
 );
-
 
 //Fin de add Event
 
 function addTask(tsktitle,tskPriority){
-
     let taskItem = document.createElement("li");
         taskItem.classList.add("list-item");
 
@@ -140,7 +148,6 @@ function addTask(tsktitle,tskPriority){
     let editBtn = btnContainer.firstChild;
     let deleteBtn = btnContainer.childNodes[1];
 
-
     if(tskPriority === "low"){
         priority.classList.add("bg-success");
     }
@@ -151,10 +158,8 @@ function addTask(tsktitle,tskPriority){
         priority.classList.add("bg-danger");
     }
 
-
     taskHeading.innerHTML = tsktitle;
     //priority.innerHTML = tskPriority;
-
 
     //Eliminar Item de Lista
     deleteBtn.addEventListener("click", function(){
@@ -191,9 +196,6 @@ function addTask(tsktitle,tskPriority){
             document.getElementById("addTask").textContent ="Add Task";
             
         })
-
-         
-        
     })
 
     btnContainer.appendChild(editBtn);
@@ -274,37 +276,20 @@ function createButtons(){
 
 
 function getDayAndMonth(date) {
-    console.log("Input date:", date);  // Log the input value
-
-    if (date.length !== 6) {
-        throw new Error("Invalid date format. Please use 'ddmmyy'.");
-    }
-
-    const day = date.substring(0, 2);
-    const monthNumber = date.substring(2, 4);
     const monthAbbreviations = [
         "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
         "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
     ];
 
-    const monthIndex = parseInt(monthNumber, 10) - 1;
-    if (monthIndex < 0 || monthIndex > 11) {
-        throw new Error("Invalid month in date.");
-    }
+    date = new Date(date + 'T00:00:00Z');
+    const dateObj = {}
 
-    const month = monthAbbreviations[monthIndex];
+    dateObj.montText = monthAbbreviations[date.getUTCMonth()];
+    dateObj.dayNumber = date.getUTCDate();
 
-    return `${day} ${month}`;
+    return dateObj;
+
 }
 
-
-const date = "280724";
-
-try {
-    const formattedDate = getDayAndMonth(date);
-    console.log(formattedDate);  // Output: 28 JUL
-} catch (error) {
-    console.error(error.message);
-}
 
 
