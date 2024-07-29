@@ -3,14 +3,8 @@ function showElement(index){
     let event = document.getElementById("events");
     let task = document.getElementById("tasks");
 
-    if(index === 1){
-        event.style.display = "none";
-        task.style.display = "block";
-    }
-    else if(index === 0){
-        event.style.display = "block";
-        task.style.display = "none";
-    }
+    event.style.display = index === 0 ? "block" : "none";
+    task.style.display = index === 1 ? "block" : "none";
 }
 
 //Codigo de los eventos
@@ -25,7 +19,6 @@ getTasks();
 
 addEventBtn.addEventListener("click",function(){
 
-        
     let eventTitle = document.getElementById("eventTitle").value;
     let eventDate = document.getElementById("eventDate").value;
 
@@ -33,35 +26,41 @@ addEventBtn.addEventListener("click",function(){
         addEvent(eventTitle,eventDate);
         eventTitle ="";
         saveEvents();
-
     }
-
-
 }
 );
 
 function addEvent(evtitle,evDate){
+
     let eventItem = document.createElement("li");
     let eventHeading = document.createElement("h3");
     let evntDate = document.createElement("span");
-            
+
+    let eventContainer = document.createElement("div");
+        eventContainer.classList.add("event-container");
+
+    let dateContainer = document.createElement("div");
+        dateContainer.classList.add("date-container");
+
+    let eventDay = document.createElement("span");
+    let eventMonth = document.createElement("span");
+
+
+
     eventHeading.innerHTML = evtitle;
     evntDate.innerHTML = evDate;
 
-    let deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = "Delete";
-        deleteBtn.className ="delete-button";
-    let editBtn = document.createElement("button");
-        editBtn.innerHTML = "Edit";
-        editBtn.className = "edit-button";
+    let btnContainer = createButtons();
+    let editBtn = btnContainer.firstChild;
+    let deleteBtn = btnContainer.childNodes[1];
 
-    //Eliminar Item de Lista
+    //Eliminar Item de EVENTO
     deleteBtn.addEventListener("click", function(){
         eventList.removeChild(eventItem);
         saveEvents();
     });
 
-    //Editar Item de Lista
+    //Editar Item de EVENTO
     editBtn.addEventListener("click", function(){
         eventItem.firstChild.textContent = prompt("Edit Your Event",eventItem.firstChild.textContent);
         eventItem.childNodes[1].textContent = prompt("Edit Event Date",eventItem.childNodes[1].textContent);
@@ -123,6 +122,9 @@ addTaskBtn.addEventListener("click",function(){
 }
 );
 
+
+//Fin de add Event
+
 function addTask(tsktitle,tskPriority){
 
     let taskItem = document.createElement("li");
@@ -134,18 +136,9 @@ function addTask(tsktitle,tskPriority){
     let priority = document.createElement("span");
         priority.classList.add("dot");
 
-
-    let btnContainer = document.createElement("div");
-        btnContainer.classList.add("btn-container");
-
-
-    let editIcon = document.createElement("i");
-        editIcon.classList.add("fa-regular");
-        editIcon.classList.add("fa-pen-to-square");
-
-    let deleteIcon = document.createElement("i");
-    deleteIcon.classList.add("fa-solid");
-    deleteIcon.classList.add("fa-trash-can");
+    let btnContainer = createButtons();
+    let editBtn = btnContainer.firstChild;
+    let deleteBtn = btnContainer.childNodes[1];
 
 
     if(tskPriority === "low"){
@@ -162,13 +155,6 @@ function addTask(tsktitle,tskPriority){
     taskHeading.innerHTML = tsktitle;
     //priority.innerHTML = tskPriority;
 
-    let deleteBtn = document.createElement("button");
-        deleteBtn.appendChild(deleteIcon);
-        deleteBtn.className ="delete-button";
-
-    let editBtn = document.createElement("button");
-        editBtn.className = "edit-button";
-        editBtn.appendChild(editIcon);
 
     //Eliminar Item de Lista
     deleteBtn.addEventListener("click", function(){
@@ -259,6 +245,66 @@ function checkDots(dot){
     }
 }
 
+function createButtons(){
 
+    let btnContainer = document.createElement("div");
+        btnContainer.classList.add("btn-container");
+
+    let editIcon = document.createElement("i");
+        editIcon.classList.add("fa-regular");
+        editIcon.classList.add("fa-pen-to-square");
+
+    let deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("fa-solid");
+    deleteIcon.classList.add("fa-trash-can");
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.appendChild(deleteIcon);
+    deleteBtn.className ="delete-button";
+
+    let editBtn = document.createElement("button");
+        editBtn.className = "edit-button";
+        editBtn.appendChild(editIcon);
+
+    btnContainer.appendChild(editBtn);
+    btnContainer.appendChild(deleteBtn);
+
+    return btnContainer;
+}
+
+
+function getDayAndMonth(date) {
+    console.log("Input date:", date);  // Log the input value
+
+    if (date.length !== 6) {
+        throw new Error("Invalid date format. Please use 'ddmmyy'.");
+    }
+
+    const day = date.substring(0, 2);
+    const monthNumber = date.substring(2, 4);
+    const monthAbbreviations = [
+        "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+        "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+    ];
+
+    const monthIndex = parseInt(monthNumber, 10) - 1;
+    if (monthIndex < 0 || monthIndex > 11) {
+        throw new Error("Invalid month in date.");
+    }
+
+    const month = monthAbbreviations[monthIndex];
+
+    return `${day} ${month}`;
+}
+
+
+const date = "280724";
+
+try {
+    const formattedDate = getDayAndMonth(date);
+    console.log(formattedDate);  // Output: 28 JUL
+} catch (error) {
+    console.error(error.message);
+}
 
 

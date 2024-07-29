@@ -31,7 +31,7 @@ if(loginForm){
     
         if(validateFormFields(userLogin)){
             if(checkUser(userLogin)){
-                window.location.href = 'events-and-tasks.html'
+                window.location.href = 'admin.html';
             }
             else{
                 alert("Email or Password not correct");

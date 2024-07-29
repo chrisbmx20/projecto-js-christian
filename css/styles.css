@@ -148,3 +148,12 @@ a {
 .nav-link:hover{
     background-color: #f5f9fc;
 }
+
+.aside-menu li a{
+    color:#262626;
+    font-size: 1.2rem;
+}
+
+.aside-menu li i{
+    margin-right:30px;
+}
