@@ -36,6 +36,7 @@ addEventBtn.addEventListener("click",function(){
 function showEvents(events){
 
     events.forEach(event =>{
+        
         let eventContainer = document.createElement("div");
         eventContainer.classList.add("event-container");
     
@@ -79,7 +80,7 @@ function showEvents(events){
         //Eliminar Item de EVENTO
         deleteBtn.addEventListener("click", function(){
             eventList.removeChild(eventContainer);
-            updateEvents(events);
+            updateEvents(events);//error aqui
         });
     
         //Editar Item de EVENTO
@@ -87,11 +88,11 @@ function showEvents(events){
             eventHeading.textContent = prompt("Edit Your Event", eventHeading.textContent);
             eventDaySpan.textContent = prompt("Edit Event Day", eventDaySpan.textContent);
             eventMonthSpan.textContent = prompt("Edit Event Date", eventMonthSpan.textContent);
-            updateEvents(events);
+            updateEvents(events);// error aqui 
         });
     });
     
-   }
+}
 
 function updateEvents(events){
     localStorage.setItem('events', JSON.stringify(events)); 
@@ -99,6 +100,7 @@ function updateEvents(events){
 
 function saveEvents(event) {
     const eventArr = getEvents() || [];
+
     eventArr.push(
         {
             title:event.title,
@@ -131,8 +133,6 @@ addTaskBtn.addEventListener("click",function(){
     }
 }
 );
-
-//Fin de add Event
 
 function addTask(tsktitle,tskPriority){
     let taskItem = document.createElement("li");
@@ -273,7 +273,6 @@ function createButtons(){
 
     return btnContainer;
 }
-
 
 function getDayAndMonth(date) {
     const monthAbbreviations = [
