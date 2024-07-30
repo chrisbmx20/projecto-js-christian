@@ -38,11 +38,22 @@
             <section class="row justify-center aligncenter py-20">
                 <div id="events" class="events">
                     <h2>Events</h2>
+                    <hr>
 
                     <div class="form-container input-group py-20">
-                        <input type="text" id="eventTitle" placeholder="Math Class" class="form-control">
-                        <input type="date" id="eventDate" placeholder="24/07/2024" class="form-control">
-                        <button class="btn btn-primary" type="button" id="addEvent">Add Event</button>
+                        <div class="row m-auto px-0 input-container-events">
+                            <div class="col col-xl-8 px-1">
+                              <input type="text" id="eventTitle" placeholder="Math Class" class="form-control">
+                            </div>
+                            <div class="col col-xl-2 px-1">
+                              <input type="date" id="eventDate" placeholder="24/07/2024" class="form-control">
+                            </div>
+                            <div class="col col-xl-2 px-1">
+                                <button class="btn btn-primary w-100" type="button" id="addEvent"><i class="fa-solid fa-plus"></i><span class="add-button-text">Add Event</span></button>
+                              </div>
+                          </div>
+                          
+            
                     </div>
 
                     <div id="event-list" class="py-20">
@@ -51,6 +62,7 @@
                 </div>
                 <div id="tasks" class="events">
                     <h2>Tasks</h2>
+                    <hr>
         
                     <div class="form-container input-group py-20 ">
                         <input type="text" id="taskText" class="form-control" aria-label="Text input with dropdown button" placeholder="e.g Terminar Proyecto JS">

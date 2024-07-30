@@ -99,7 +99,7 @@ function showEvents(events){
             eventTitle.value = event.title;
             eventDate.value = event.date;
 
-            addEventBtn.textContent = "Edit Event";
+            addEventBtn.childNodes[1].textContent = "Edit Event";
             addEventBtn.id ='editEventBtn';
 
             document.getElementById("editEventBtn").addEventListener("click",()=>{
@@ -114,7 +114,7 @@ function showEvents(events){
                 updateEvents(events);
 
                 document.getElementById("editEventBtn").id ="addEventBtn";
-                document.getElementById("addEventBtn").textContent ="Add Event";
+                document.getElementById("addEventBtn").childNodes[1].textContent ="Add Event";
 
                 addEventBtn.addEventListener("click", addEvent);
                 addEventBtn.removeEventListener("click", editEvent);

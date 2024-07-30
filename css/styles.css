@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+body,html{
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
 li {
     list-style: none;
 }
@@ -50,11 +56,13 @@ a {
 #task-list li, #event-list li {
     width: 100%;
     display: flex;
+    
 }
 
 #task-list, #event-list{
     width: 100%;
     padding: 0px;
+    margin-top: 30px;
 }
 
 
@@ -177,13 +185,13 @@ a {
 
 
 .date-container{
-    width:30%;
+    width:20%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding:20px;
-    
+    background-color:#faf7fe;
    
 }
 
@@ -193,12 +201,12 @@ a {
 
 }
 .event-features{
-    width: 70%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items:flex-start;
     justify-content: center;
-    padding: 20px;
+    padding: 20px 30px;
 }
 
 .event-day{
@@ -210,8 +218,10 @@ a {
     font-size: 32px;
     font-weight: 700;
 }
-
-@media only screen and (max-width: 600px) {
+.add-button-text{
+    margin-left:10px;
+}
+@media only screen and (max-width: 900px) {
     .event-container{
         width: 100%;
         display: flex;
@@ -227,7 +237,7 @@ a {
         width:100%;
         padding:20px;
         justify-content: flex-start;
-        background-color:#f3eafc;
+        background-color:#faf7fe;
     }
 
     .date-container span{
@@ -238,7 +248,7 @@ a {
         width: 100%;
     }
 
-    .menu-text{
+    .menu-text,.add-button-text{
         display: none;
     }
 
@@ -246,7 +256,33 @@ a {
         margin-right:0px;
         text-align: center;
         font-size:25px;
+        padding:0px;
     }
-    
+
+    .nav-link{
+        padding:5px;
+        margin:0px;
+        display: flex;
+        justify-content: center;
+    }
+   
 
 }
+
+@media only screen and (max-width:600px){
+    .input-container-events{
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .input-container-events input{
+        margin-bottom:15px;
+        
+    }
+
+    .event-day, .event-month{
+        font-size: 20px;
+        margin-left:10px;
+    }
+}
+
