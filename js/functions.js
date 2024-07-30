@@ -13,9 +13,9 @@ let taskList = document.getElementById("task-list");
 
 let addEventBtn = document.getElementById("addEvent");
 
-
-showEvents(getEvents());
 getTasks();
+showEvents(getEvents());
+
 
 addEventBtn.addEventListener("click",function(){
 
@@ -34,8 +34,8 @@ addEventBtn.addEventListener("click",function(){
 );
 
 function showEvents(events){
-
-    events.forEach(event =>{
+    eventList.innerHTML = ""; // Clear existing events
+    events.forEach((event, index) =>{
         
         let eventContainer = document.createElement("div");
         eventContainer.classList.add("event-container");
@@ -79,17 +79,45 @@ function showEvents(events){
     
         //Eliminar Item de EVENTO
         deleteBtn.addEventListener("click", function(){
-            eventList.removeChild(eventContainer);
-            updateEvents(events);//error aqui
+            events.splice(index, 1); // Remove event from the array
+            updateEvents(events);
+            showEvents(events);
         });
     
         //Editar Item de EVENTO
         editBtn.addEventListener("click", function(){
-            eventHeading.textContent = prompt("Edit Your Event", eventHeading.textContent);
-            eventDaySpan.textContent = prompt("Edit Event Day", eventDaySpan.textContent);
-            eventMonthSpan.textContent = prompt("Edit Event Date", eventMonthSpan.textContent);
-            updateEvents(events);// error aqui 
+
+            console.log("aqui estamos");
+            let eventTitle = document.getElementById("eventTitle");
+            let eventDate = document.getElementById("eventDate");
+
+            eventTitle.value = event.title;
+            eventDate.value = event.date;
+
+            addEventBtn.textContent = "Edit Event";
+            addEventBtn.id ='editEventBtn';
+
+            document.getElementById("editEventBtn").addEventListener("click",()=>{
+                
+                event.title = eventTitle.value;
+                event.date = eventDate.value;
+                
+                
+                eventTitle.value = "";
+                eventDate.value = "";
+                
+                updateEvents(events);
+                showEvents(events);
+                
+                document.getElementById("editEventBtn").id ="addEvent";
+                document.getElementById("addEvent").textContent ="Add Event";
+                
+            })
+
         });
+
+    
+        
     });
     
 }
@@ -174,7 +202,7 @@ function addTask(tsktitle,tskPriority){
         let taskTitle = document.getElementById("taskText");
         
         addTaskBtn.textContent = "";
-        //taskItem.style.backgroundColor ="blueviolet";
+        
         taskTitle.value = taskItem.firstChild.textContent;
         prioritySelect.value = checkDots(taskItem.childNodes[1]);
 
