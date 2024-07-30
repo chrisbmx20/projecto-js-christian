@@ -106,6 +106,7 @@ function showEvents(events){
                 eventDate.value = "";
                 
                 updateEvents(events);
+                showEvents(events);
                 
                 document.getElementById("editEventBtn").id ="addEventBtn";
                 document.getElementById("addEventBtn").textContent ="Add Event";
