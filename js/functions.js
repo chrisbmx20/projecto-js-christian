@@ -87,7 +87,6 @@ function showEvents(events){
         //Editar Item de EVENTO
         editBtn.addEventListener("click", function(){
 
-            console.log("aqui estamos");
             let eventTitle = document.getElementById("eventTitle");
             let eventDate = document.getElementById("eventDate");
 
