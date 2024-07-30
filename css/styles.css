@@ -118,6 +118,11 @@ a {
     display: inline-block;
   }
 
+  .dashboard{
+    overflow-y: scroll;
+    padding-bottom:30px !important;
+  }
+
   .list-item{
     justify-content: space-between;
     align-items: center;
@@ -182,11 +187,8 @@ a {
 
 .date-container span{
     margin: bottom 10px;
-    font-weight: 600;
-    font-size: 20px;
     text-align: center;
-    padding:10px;
-    border: 1px dashed blueviolet;
+
 }
 .event-features{
     width: 80%;
@@ -195,4 +197,14 @@ a {
     align-items:flex-start;
     justify-content: center;
     padding: 20px;
+}
+
+.event-day{
+    font-size: 32px;
+    color:blueviolet;
+    font-weight: 600;
+}
+.event-month{
+    font-size: 32px;
+    font-weight: 700;
 }

@@ -16,7 +16,6 @@ let addEventBtn = document.getElementById("addEvent");
 getTasks();
 showEvents(getEvents());
 
-
 addEventBtn.addEventListener("click",function(){
 
     let eventTitle = document.getElementById("eventTitle").value;
@@ -27,14 +26,19 @@ addEventBtn.addEventListener("click",function(){
                 title: eventTitle,
                 date: eventDate
         }
-        saveEvents(event);
+
         eventTitle ="";
+        saveEvents(event);
     }
 }
 );
 
-function showEvents(events){
+function clearEvents(){
     eventList.innerHTML = "";
+}
+
+function showEvents(events){
+    
     events.forEach((event, index) =>{
         
         let eventContainer = document.createElement("div");
@@ -56,9 +60,11 @@ function showEvents(events){
         let eventDateObjt = getDayAndMonth(event.date);
     
         let eventDaySpan = document.createElement("span");
+        eventDaySpan.classList.add("event-day");
         eventDaySpan.textContent = eventDateObjt.dayNumber;
     
         let eventMonthSpan = document.createElement("span");
+        eventMonthSpan.classList.add("event-month");
         eventMonthSpan.textContent = eventDateObjt.montText;
     
         let btnContainer = createButtons();
@@ -79,9 +85,9 @@ function showEvents(events){
     
         //Eliminar Item de EVENTO
         deleteBtn.addEventListener("click", function(){
+            //clearEvents();
             events.splice(index, 1); // Remove event from the array
             updateEvents(events);
-            showEvents(events);
         });
     
         //Editar Item de EVENTO
@@ -100,29 +106,30 @@ function showEvents(events){
                 
                 event.title = eventTitle.value;
                 event.date = eventDate.value;
-                
-                
+
                 eventTitle.value = "";
                 eventDate.value = "";
                 
+               // clearEvents();
                 updateEvents(events);
-                showEvents(events);
-                
+
                 document.getElementById("editEventBtn").id ="addEventBtn";
                 document.getElementById("addEventBtn").textContent ="Add Event";
-                
+
+                addEventBtn.addEventListener("click", addEvent);
+                addEventBtn.removeEventListener("click", editEvent);
+
             })
 
         });
-
-    
-        
     });
     
 }
 
 function updateEvents(events){
-    localStorage.setItem('events', JSON.stringify(events)); 
+    localStorage.setItem('events', JSON.stringify(events));
+    clearEvents();
+    showEvents(events);
 }
 
 function saveEvents(event) {
@@ -135,8 +142,8 @@ function saveEvents(event) {
         }
     );
 
-    updateEvents(eventArr);
-    showEvents(eventArr); 
+    updateEvents(eventArr); 
+    
 }
 
 function getEvents() {
@@ -157,6 +164,7 @@ addTaskBtn.addEventListener("click",function(){
         taskTitle = "";
         prioritySelect = "low";
         saveTasks();
+        
     }
 }
 );

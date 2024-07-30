@@ -41,6 +41,7 @@ if(loginForm){
     });
 }
 
+
 function validateFormFields(obj) {
     return Object.values(obj).every(value => value !== "");
 }
