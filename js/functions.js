@@ -34,7 +34,7 @@ addEventBtn.addEventListener("click",function(){
 );
 
 function showEvents(events){
-    eventList.innerHTML = ""; // Clear existing events
+    eventList.innerHTML = "";
     events.forEach((event, index) =>{
         
         let eventContainer = document.createElement("div");
@@ -52,7 +52,7 @@ function showEvents(events){
         let eventDescription = document.createElement("p");
         eventDescription.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, placeat.";
     
-        // de aqui obtenemos el
+        // de aqui obtenemos el mes y el dia
         let eventDateObjt = getDayAndMonth(event.date);
     
         let eventDaySpan = document.createElement("span");
@@ -106,10 +106,9 @@ function showEvents(events){
                 eventDate.value = "";
                 
                 updateEvents(events);
-                showEvents(events);
                 
-                document.getElementById("editEventBtn").id ="addEvent";
-                document.getElementById("addEvent").textContent ="Add Event";
+                document.getElementById("editEventBtn").id ="addEventBtn";
+                document.getElementById("addEventBtn").textContent ="Add Event";
                 
             })
 

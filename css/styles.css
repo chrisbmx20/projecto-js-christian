@@ -176,6 +176,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
    
 }
 
@@ -183,6 +184,9 @@ a {
     margin: bottom 10px;
     font-weight: 600;
     font-size: 20px;
+    text-align: center;
+    padding:10px;
+    border: 1px dashed blueviolet;
 }
 .event-features{
     width: 80%;
