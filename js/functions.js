@@ -13,7 +13,7 @@ let taskList = document.getElementById("task-list");
 
 let addEventBtn = document.getElementById("addEvent");
 
-getTasks();
+showTasks(getTasks());
 showEvents(getEvents());
 
 addEventBtn.addEventListener("click",function(){
@@ -36,6 +36,9 @@ addEventBtn.addEventListener("click",function(){
 function clearEvents(){
     eventList.innerHTML = "";
 }
+
+
+
 
 function showEvents(events){
     
@@ -110,7 +113,6 @@ function showEvents(events){
                 eventTitle.value = "";
                 eventDate.value = "";
                 
-               // clearEvents();
                 updateEvents(events);
 
                 document.getElementById("editEventBtn").id ="addEventBtn";
@@ -142,13 +144,11 @@ function saveEvents(event) {
         }
     );
 
-    updateEvents(eventArr); 
-    
+    updateEvents(eventArr);  
 }
 
 function getEvents() {
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    return events;
+  return JSON.parse(localStorage.getItem('events')) || [];
 }
 
 //codigo de las tareas
@@ -160,18 +160,27 @@ addTaskBtn.addEventListener("click",function(){
     let taskTitle = document.getElementById("taskText").value;
 
     if (taskTitle !="" && prioritySelect!=""){
-        addTask(taskTitle,prioritySelect);
-        taskTitle = "";
-        prioritySelect = "low";
-        saveTasks();
+
+        const task = {
+            title: taskTitle,
+            priority:prioritySelect
+        }
+
+        saveTask(task);
         
     }
+
+    taskTitle = "";
+    prioritySelect = "low";
 }
 );
 
-function addTask(tsktitle,tskPriority){
+function showTasks(tasks){
+    
+    tasks.forEach((task,index) => {
+
     let taskItem = document.createElement("li");
-        taskItem.classList.add("list-item");
+    taskItem.classList.add("list-item");
 
     let taskHeading = document.createElement("h3");
         taskHeading.classList.add("task-heading");
@@ -183,23 +192,23 @@ function addTask(tsktitle,tskPriority){
     let editBtn = btnContainer.firstChild;
     let deleteBtn = btnContainer.childNodes[1];
 
-    if(tskPriority === "low"){
+    if(task.priority === "low"){
         priority.classList.add("bg-success");
     }
-    else if(tskPriority === "medium"){
+    else if(task.priority === "medium"){
         priority.classList.add("bg-warning");
     }
     else{
         priority.classList.add("bg-danger");
     }
 
-    taskHeading.innerHTML = tsktitle;
-    //priority.innerHTML = tskPriority;
+    taskHeading.textContent = task.title;
 
     //Eliminar Item de Lista
     deleteBtn.addEventListener("click", function(){
-        taskList.removeChild(taskItem);
-        saveTasks();
+        tasks.splice(index, 1);
+        updateTasks(tasks);
+       
     });
 
     //Editar Item de Lista
@@ -210,25 +219,27 @@ function addTask(tsktitle,tskPriority){
         
         addTaskBtn.textContent = "";
         
-        taskTitle.value = taskItem.firstChild.textContent;
-        prioritySelect.value = checkDots(taskItem.childNodes[1]);
+        taskTitle.value = task.title;
+        prioritySelect.value = task.priority;
 
         addTaskBtn.textContent = "Edit Task";
         addTaskBtn.id ='editTaskBtn';
 
         document.getElementById("editTaskBtn").addEventListener("click",()=>{
-            taskList.removeChild(taskItem);
-
-            taskItem.firstChild.textContent = taskTitle.value;
-            taskItem.childNodes[1].textContent = prioritySelect.value; 
+            
+            task.title = taskTitle.value;
+            task.priority = prioritySelect.value;
 
             taskTitle.value = "";
             prioritySelect.value = "low";
             
-            saveTasks();
-            
             document.getElementById("editTaskBtn").id ="addTask";
             document.getElementById("addTask").textContent ="Add Task";
+
+            //addTaskBtn.addEventListener("click", addEvent);
+            //addTaskBtn.removeEventListener("click", editEvent);
+
+            updateTasks(tasks);
             
         })
     })
@@ -242,32 +253,33 @@ function addTask(tsktitle,tskPriority){
     
     taskList.appendChild(taskItem);
 
-    saveTasks();
+    })
 
 }
 
-function saveTasks() {
-    const taskArr = [];
+function clearTasks(){
+    taskList.innerHTML = "";
+}
 
-    taskList.querySelectorAll('li').forEach(tasktItem => {
+function updateTasks(tasks){
 
-        taskArr.push(
-            {
-                name:tasktItem.firstChild.textContent,
-                priority:checkDots(tasktItem.childNodes[1])
-            }
-        );
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 
-    });
+    clearTasks();
+    showTasks(tasks);
+}
 
-    localStorage.setItem('tasks', JSON.stringify(taskArr));
+function saveTask(task) {
+
+    const taskArr = getTasks() || [];
+    taskArr.push(task);
+
+    updateTasks(taskArr); 
     
 }
 
 function getTasks() {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.forEach(task => addTask(task.name,task.priority));
-    
+    return JSON.parse(localStorage.getItem('tasks')) || [];
 }
 
 function checkDots(dot){
