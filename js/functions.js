@@ -18,17 +18,19 @@ showEvents(getEvents());
 
 addEventBtn.addEventListener("click",function(){
 
-    let eventTitle = document.getElementById("eventTitle").value;
-    let eventDate = document.getElementById("eventDate").value;
+    let eventTitle = document.getElementById("eventTitle");
+    let eventDate = document.getElementById("eventDate");
 
     if (eventTitle !="" && eventDate!=""){
         const event = {
-                title: eventTitle,
-                date: eventDate
+                title: eventTitle.value,
+                date: eventDate.value
         }
 
-        eventTitle ="";
         saveEvents(event);
+
+        eventTitle.value = "";
+        eventDate.value = "";
     }
 }
 );
@@ -157,22 +159,22 @@ let taskForm = document.getElementById("taskForm");
 
 addTaskBtn.addEventListener("click",function(){
 
-    let prioritySelect = document.getElementById("priority").value;    
-    let taskTitle = document.getElementById("taskText").value;
+    let prioritySelect = document.getElementById("priority");    
+    let taskTitle = document.getElementById("taskText");
 
     if (taskTitle !="" && prioritySelect!=""){
 
         const task = {
-            title: taskTitle,
-            priority:prioritySelect
+            title: taskTitle.value,
+            priority:prioritySelect.value
         }
         
         saveTask(task);
         
     }
 
-    taskTitle = "";
-    prioritySelect = "low";
+    taskTitle.value = "";
+    prioritySelect.value = "low";
 }
 );
 
@@ -237,8 +239,8 @@ function showTasks(tasks){
             document.getElementById("editTaskBtn").id ="addTask";
             document.getElementById("addTask").textContent ="Add Task";
 
-            //addTaskBtn.addEventListener("click", addEvent);
-            //addTaskBtn.removeEventListener("click", editEvent);
+            addTaskBtn.addEventListener("click", addEvent);
+            addTaskBtn.removeEventListener("click", editEvent);
 
             updateTasks(tasks);
             
