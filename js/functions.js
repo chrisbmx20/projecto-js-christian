@@ -13,8 +13,11 @@ let taskList = document.getElementById("task-list");
 
 let addEventBtn = document.getElementById("addEvent");
 
+getEvents() != [] ? showEvents(getEvents()):
+getTasks() != [] ? showTasks(getTasks()):
+
 showTasks(getTasks());
-showEvents(getEvents());
+
 
 addEventBtn.addEventListener("click",function(){
 
@@ -96,35 +99,36 @@ function showEvents(events){
         });
     
         //Editar Item de EVENTO
-        editBtn.addEventListener("click", function(){
 
+        editBtn.addEventListener("click", function () {
+
+            addEventBtn.removeEventListener("click", addEvent);
+            
             let eventTitle = document.getElementById("eventTitle");
             let eventDate = document.getElementById("eventDate");
 
             eventTitle.value = event.title;
             eventDate.value = event.date;
 
-            addEventBtn.childNodes[1].textContent = "Edit Event";
-            addEventBtn.id ='editEventBtn';
-
-            document.getElementById("editEventBtn").addEventListener("click",()=>{
-                
+            const editEventBtn = () => {
                 event.title = eventTitle.value;
                 event.date = eventDate.value;
 
                 eventTitle.value = "";
                 eventDate.value = "";
-                
+
                 updateEvents(events);
 
-                document.getElementById("editEventBtn").id ="addEventBtn";
-                document.getElementById("addEventBtn").childNodes[1].textContent ="Add Event";
-
+                addEventBtn.textContent = "Add Event";
+                addEventBtn.id = 'addEvent';
+                addEventBtn.removeEventListener("click", editEventBtn);
                 addEventBtn.addEventListener("click", addEvent);
-                addEventBtn.removeEventListener("click", editEvent);
+            };
 
-            })
+            addEventBtn.textContent = "Edit Event";
+            addEventBtn.id = 'editEventBtn';
 
+            addEventBtn.addEventListener("click", editEventBtn);
         });
     });
     
@@ -155,7 +159,6 @@ function getEvents() {
 
 //codigo de las tareas
 let addTaskBtn = document.getElementById("addTask");
-let taskForm = document.getElementById("taskForm");
 
 addTaskBtn.addEventListener("click",function(){
 
