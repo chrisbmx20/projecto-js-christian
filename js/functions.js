@@ -153,6 +153,7 @@ function getEvents() {
 
 //codigo de las tareas
 let addTaskBtn = document.getElementById("addTask");
+let taskForm = document.getElementById("taskForm");
 
 addTaskBtn.addEventListener("click",function(){
 
@@ -165,7 +166,7 @@ addTaskBtn.addEventListener("click",function(){
             title: taskTitle,
             priority:prioritySelect
         }
-
+        
         saveTask(task);
         
     }
@@ -293,7 +294,6 @@ function checkDots(dot){
         return "high";
     }
 }
-
 function createButtons(){
 
     let btnContainer = document.createElement("div");
