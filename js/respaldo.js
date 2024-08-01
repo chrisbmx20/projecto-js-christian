@@ -18,16 +18,17 @@ showEvents(getEvents());
 
 addEventBtn.addEventListener("click",function(){
 
-    let eventTitle = document.getElementById("eventTitle").value;
-    let eventDate = document.getElementById("eventDate").value;
+    let eventTitle = document.getElementById("eventTitle");
+    let eventDate = document.getElementById("eventDate");
 
     if (eventTitle !="" && eventDate!=""){
         const event = {
-                title: eventTitle,
-                date: eventDate
+                title: eventTitle.value,
+                date: eventDate.value
         }
 
-        eventTitle ="";
+        eventTitle.value = "";
+        eventDate.value = "";
         saveEvents(event);
     }
 }
@@ -156,13 +157,13 @@ let addTaskBtn = document.getElementById("addTask");
 
 addTaskBtn.addEventListener("click",function(){
 
-    let prioritySelect = document.getElementById("priority").value;    
-    let taskTitle = document.getElementById("taskText").value;
+    let prioritySelect = document.getElementById("priority");    
+    let taskTitle = document.getElementById("taskText");
 
     if (taskTitle !="" && prioritySelect!=""){
-        addTask(taskTitle,prioritySelect);
-        taskTitle = "";
-        prioritySelect = "low";
+        addTask(taskTitle.value,prioritySelect.value);
+        taskTitle.value = "";
+        prioritySelect.value = "low";
         saveTasks();
         
     }

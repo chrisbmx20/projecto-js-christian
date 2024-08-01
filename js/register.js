@@ -41,6 +41,7 @@ if(loginForm){
     
         if(validateFormFields(userLogin)){
             if(checkUser(userLogin)){
+                alert("Welcome Back "+ userLogin.email)
                 window.location.href = 'admin.html';
             }
             else{
