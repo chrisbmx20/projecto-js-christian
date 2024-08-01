@@ -13,12 +13,22 @@ if(registerForm){
         user.password = document.getElementById("password").value;
         user.email = document.getElementById("email").value;
     
-        validateFormFields(user)? saveUser(user) : console.log("There was an error");
-    
+        validateFormFields(user)? saveUser(user) : console.log("You are missing some fields please check");
+
         clearForm(registerForm);
     }
     );
 }
+
+/*
+function validateUser(userVal){
+
+    getUsers().forEach(user => {
+        user.email == userVal.email ? alert("Existing User on Database") : saveUser(user)
+    });
+}
+
+*/
 
 if(loginForm){
     loginForm.addEventListener("submit", event =>{
